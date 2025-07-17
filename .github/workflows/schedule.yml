@@ -16,7 +16,7 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
     container:
-      image: iovisor/bcc:latest
+      image: kindlyops/bcc:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
