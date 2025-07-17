@@ -1,0 +1,38 @@
+name: Run Script on Schedule
+
+on:
+  schedule:
+    # Run at 2:00 UTC every day
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual trigger too
+
+env:
+  API_KEY: ${{ secrets.MY_API_KEY }}
+  SEND_EMAIL: ${{ secrets.SEND_EMAIL }}
+  EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
+  GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # Install dependencies (if you have requirements.txt)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # Run your script
+      - name: Run Python script
+        run: python main.py
