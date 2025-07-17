@@ -27,6 +27,12 @@ jobs:
         with:
           python-version: '3.x'
 
+      # Install other dependencies
+      - name: Install system dependencies for bcc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bpfcc-tools libbpfcc-dev python3-bcc
+
       # Install dependencies (if you have requirements.txt)
       - name: Install dependencies
         run: |
