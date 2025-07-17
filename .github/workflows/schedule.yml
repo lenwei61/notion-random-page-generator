@@ -15,30 +15,19 @@ env:
 jobs:
   run-script:
     runs-on: ubuntu-latest
-
+    container:
+      image: iovisor/bcc:latest
     steps:
-      # Checkout the repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      # Install other dependencies
-      - name: Install system dependencies for bcc
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y bpfcc-tools libbpfcc-dev libbcc-dev
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
-      # Install dependencies (if you have requirements.txt)
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      # Run your script
-      - name: Run Python script
+      - name: Run script
         run: python main.py
