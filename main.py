@@ -2,6 +2,7 @@ import requests
 import random
 import yagmail
 from dotenv import load_dotenv
+from distutils.util import strtobool
 import os
 
 load_dotenv()
@@ -16,7 +17,7 @@ headers = {
     "Authorization": "Bearer " + os.getenv("API_KEY"),
     "Notion-Version": "2022-06-28"
 }
-send_email = os.getenv("SEND_EMAIL")
+send_email = bool(strtobool(os.getenv('SEND_EMAIL', 'True')))
 
 
 def main():
@@ -34,7 +35,7 @@ def main():
       random_page = random.choice(results)
       print("Link to random page: " + random_page['url'])
 
-      if send_email == "true": 
+      if send_email: 
         try:
           yag = yagmail.SMTP(os.getenv("EMAIL_RECIPIENT"), os.getenv("GMAIL_APP_PASSWORD"))
           yag.send(
