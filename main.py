@@ -34,7 +34,7 @@ def main():
       random_page = random.choice(results)
       print("Link to random page: " + random_page['url'])
 
-      if send_email: 
+      if send_email == "true": 
         try:
           yag = yagmail.SMTP(os.getenv("EMAIL_RECIPIENT"), os.getenv("GMAIL_APP_PASSWORD"))
           yag.send(
