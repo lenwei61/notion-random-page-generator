@@ -2,7 +2,6 @@ import requests
 import random
 import yagmail
 from dotenv import load_dotenv
-from distutils.util import strtobool
 import os
 
 load_dotenv()
@@ -17,8 +16,7 @@ headers = {
     "Authorization": "Bearer " + os.getenv("API_KEY"),
     "Notion-Version": "2022-06-28"
 }
-send_email = bool(strtobool(os.getenv('SEND_EMAIL', 'True')))
-
+send_email = os.getenv('SEND_EMAIL', 'True').lower() in ('true', '1', 'yes')
 
 def main():
     try:
