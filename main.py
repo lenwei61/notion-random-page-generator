@@ -44,6 +44,8 @@ def main():
           print("E-Mail successfully sent")
         except:
           print("Error while sending E-Mail")
+      else:
+        print("E-Mail sending is disabled. Set environment variable SEND_EMAIL to True to enable.")
     except:
        print("Error while getting random page")
 
