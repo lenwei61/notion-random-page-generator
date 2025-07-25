@@ -2,8 +2,8 @@ name: Run main.py Daily
 
 on:
   schedule:
-    # Runs every day at 6:00 UTC
-    - cron: '0 6 * * *'
+    # Runs every day at 4:00 UTC
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 env:
